@@ -10,11 +10,11 @@ CAN database format(or .dbc format) is the de facto standard for can config file
 
 ### Code generator
 
-There are plenty of software support for dbc format, and even dozens of code generators that can generate c code from it, see [cantools](https://cantools.readthedocs.io/en/latest/#the-generate-c-source-subcommand) for possible options. However, none of the options was adopted here, instead [coderdbc](c-coderdbc/README.md) was chosen since it provides functions to receive can signals which uses binary search for the best performance and other utilities such as debugging tools.
+There are plenty of software support for dbc format, and even dozens of code generators that can generate c code from it, see [cantools](https://cantools.readthedocs.io/en/latest/#the-generate-c-source-subcommand) for possible options. However, none of the options was adopted here, instead [coderdbc](https://github.com/astand/c-coderdbc/blob/39611296382a3a222fa80c2b0bd95871d2c39701/README.md) was chosen since it provides functions to receive can signals which uses binary search for the best performance and other utilities such as debugging tools.
 
 ## Usage
 
-The usage of coderdbc can be found in the [README.md](c-coderdbc/README.md), but for automation purposes, two shell scripts are provided here.
+The usage of coderdbc can be found in the [README.md](https://github.com/astand/c-coderdbc/blob/39611296382a3a222fa80c2b0bd95871d2c39701/README.md), but for automation purposes, two shell scripts are provided here.
 
 ### fixfile.sh
 

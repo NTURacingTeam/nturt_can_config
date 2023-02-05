@@ -71,8 +71,8 @@ fi
 DBC_FILE_BASENAME=${DBC_FILE_WITH_PATH%.*}
 
 if [[ -d generated_code/${DBC_FILE_BASENAME} ]]; then
-    echo "Directory ${DBC_FILE_BASENAME} already exits, move to ${DBC_FILE_BASENAME}.bak"
-    mv ${DBC_FILE_BASENAME} ${DBC_FILE_BASENAME}.bak
+    echo "Directory \"${DBC_FILE_BASENAME}\" already exits, move to \"${DBC_FILE_BASENAME}.bak\""
+    mv generated_code/${DBC_FILE_BASENAME} generated_code/${DBC_FILE_BASENAME}.bak
 fi
 
 mkdir -p generated_code/${DBC_FILE_BASENAME}
