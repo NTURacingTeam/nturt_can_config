@@ -12,13 +12,15 @@ print_usage() {
     echo ""
     echo "Usage: ./generate_c_code.sh [OPTIONS] <can_database_file>"
     echo "Options:"
-    echo "    -h --help            Print this help message and exit"
+    echo "    -h --help       Print this help message and exit"
+    echo "    -p --physical   Configure the generated code to use physical values(double) instead of raw data"
 }
 
-# default argument
+# default argument/option
 DBC_FILE_WITH_PATH=""
+USE_PHYSICAL_VALUE=false
 
-PARAM=$(getopt -o h -l help -n "$0" -- "$@")
+PARAM=$(getopt -o hp -l help,physical -n "$0" -- "$@")
 
 if [ $? != 0 ]; then
     print_usage
@@ -37,6 +39,10 @@ while true; do
             shift
             ;;
         
+        -p|--physical)
+            USE_PHYSICAL_VALUE=true
+            shift
+            ;;
         --)
             shift
             if [[ -z $* ]]; then
@@ -69,6 +75,7 @@ if ! [[ -x c-coderdbc/build/coderdbc ]]; then
 fi
 
 DBC_FILE_BASENAME=${DBC_FILE_WITH_PATH%.*}
+DBC_FILE_UPPER_CASE=${DBC_FILE_BASENAME^^}
 
 if [[ -d generated_code/${DBC_FILE_BASENAME} ]]; then
     echo "Directory \"${DBC_FILE_BASENAME}\" already exits, move to \"${DBC_FILE_BASENAME}.bak\""
@@ -82,5 +89,12 @@ mkdir -p generated_code/${DBC_FILE_BASENAME}
 
 # fix generated code
 ./fixfile.sh generated_code/${DBC_FILE_BASENAME} 1>/dev/null
+
+# configure to use physical values
+if [ "${USE_PHYSICAL_VALUE}" = true ]; then
+    sed -i "/${DBC_FILE_UPPER_CASE}_USE_SIGFLOAT/c\#define ${DBC_FILE_UPPER_CASE}_USE_SIGFLOAT" \
+        generated_code/${DBC_FILE_BASENAME}/include/${DBC_FILE_BASENAME}-config.h
+    sed -i "/typedef double sigfloat_t;/c\typedef double sigfloat_t;" generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
+fi
 
 echo "Generate code completed"

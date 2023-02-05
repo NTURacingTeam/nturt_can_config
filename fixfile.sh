@@ -12,10 +12,10 @@ print_usage() {
     echo ""
     echo "Usage: ./fixfile.sh [OPTIONS] <directory>"
     echo "Options:"
-    echo "    -h --help            Print this help message and exit"
+    echo "    -h --help       Print this help message and exit"
 }
 
-# default argument
+# default argument/option
 DIRECTORY=""
 SUBDIRECTORY=("butl" "conf" "inc" "lib" "usr")
 

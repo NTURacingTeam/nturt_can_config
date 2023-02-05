@@ -20,10 +20,18 @@ The usage of coderdbc can be found in the [README.md](https://github.com/astand/
 
 By default, the code generated from `coderdbc` can not directory be used in a c project as it is not in the standard c file structure with `include` and `src`, instead, the header and source files are scattered in `butl`, `conf`, `inc`, `lib` and `usr` directory. Hence, this shell script converted them back to the normal c file structure.
 
-Usage: fixfile.sh [OPTIONS] \<directory\>
+Usage: 
+
+```shell=
+./fixfile.sh [OPTIONS] \<directory\>
+```
 
 ### generate_c_code.sh
 
 This shell script is inteded for automating code generation that can be included in prebuild steps of stm32cube ide or cmake. It generate code to `generated_code` directory and use `fixfile.sh` to make the generated code readily available to be included in a c/c++ project.
 
-Usage: ./generate_c_code.sh [OPTIONS] <can_database_file>
+Usage:
+
+```shell=
+./generate_c_code.sh [OPTIONS] <can_database_file>
+```
