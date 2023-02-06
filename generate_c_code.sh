@@ -4,8 +4,8 @@
 COLOR_REST='\e[0m'
 HIGHLIGHT='\e[0;1m'
 REVERSE='\e[0;7m'
-COLOR_GREEN='\e[0;32m'
 COLOR_RED='\e[1;31m'
+COLOR_YELLOW='\e[1;93m'
 
 print_usage() {
     echo "Generate c code from can database file from <can_data_base_file>, the generated code will be in \"generated_code\" directory"
@@ -66,35 +66,48 @@ while true; do
     esac
 done
 
+# get absolute path
+ABSOLUTE_PATH=$(dirname $(realpath ${BASH_SOURCE:-$0}))
+
 # build the code generator if it's not already built
-if ! [[ -x c-coderdbc/build/coderdbc ]]; then
+if ! [[ -x ${ABSOLUTE_PATH}/c-coderdbc/build/coderdbc ]]; then
     echo "Software for generating c code not built, building..."
-    cmake -S c-coderdbc/src -B c-coderdbc/build 1>/dev/null
-    cmake --build c-coderdbc/build --config release 1>/dev/null
+    cmake -S ${ABSOLUTE_PATH}/c-coderdbc/src -B ${ABSOLUTE_PATH}/c-coderdbc/build 1>/dev/null
+    cmake --build ${ABSOLUTE_PATH}/c-coderdbc/build --config release 1>/dev/null
     echo "Software for generating c code finished building"
 fi
 
-DBC_FILE_BASENAME=${DBC_FILE_WITH_PATH%.*}
+# get dbc file base name
+DBC_FILE=${DBC_FILE_WITH_PATH##*/}
+DBC_FILE_BASENAME=${DBC_FILE%.*}
+
 DBC_FILE_UPPER_CASE=${DBC_FILE_BASENAME^^}
 
-if [[ -d generated_code/${DBC_FILE_BASENAME} ]]; then
+if [[ -d ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME} ]]; then
+    if [[ -d ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}.bak ]]; then
+        echo -e "${COLOR_YELLOW}Warning:${HIGHLIGHT} backup for \"${DBC_FILE_BASENAME}\" already exist.${COLOR_REST} Removing"
+        rm -r ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}.bak
+    fi
+
     echo "Directory \"${DBC_FILE_BASENAME}\" already exits, move to \"${DBC_FILE_BASENAME}.bak\""
-    mv generated_code/${DBC_FILE_BASENAME} generated_code/${DBC_FILE_BASENAME}.bak
+    mv ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME} ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}.bak
 fi
 
-mkdir -p generated_code/${DBC_FILE_BASENAME}
+mkdir -p ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}
 
 # generate code
-./c-coderdbc/build/coderdbc -dbc ${DBC_FILE_WITH_PATH} -out generated_code/${DBC_FILE_BASENAME} -drvname ${DBC_FILE_BASENAME} -nodeutils 1>/dev/null
+${ABSOLUTE_PATH}/c-coderdbc/build/coderdbc -rm -dbc ${DBC_FILE_WITH_PATH} -out ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME} \
+    -drvname ${DBC_FILE_BASENAME} -nodeutils 1>/dev/null
 
 # fix generated code
-./fixfile.sh generated_code/${DBC_FILE_BASENAME} 1>/dev/null
+${ABSOLUTE_PATH}/fixfile.sh ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME} 1>/dev/null
 
 # configure to use physical values
 if [ "${USE_PHYSICAL_VALUE}" = true ]; then
     sed -i "/${DBC_FILE_UPPER_CASE}_USE_SIGFLOAT/c\#define ${DBC_FILE_UPPER_CASE}_USE_SIGFLOAT" \
-        generated_code/${DBC_FILE_BASENAME}/include/${DBC_FILE_BASENAME}-config.h
-    sed -i "/typedef double sigfloat_t;/c\typedef double sigfloat_t;" generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
+        ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/${DBC_FILE_BASENAME}-config.h
+    sed -i "/typedef double sigfloat_t;/c\typedef double sigfloat_t;" \
+        ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
 fi
 
 echo "Generate code completed"

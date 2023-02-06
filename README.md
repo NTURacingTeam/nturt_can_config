@@ -35,3 +35,22 @@ Usage:
 ```shell=
 ./generate_c_code.sh [OPTIONS] <can_database_file>
 ```
+
+### Use in stm32cubeide
+
+The generated code can be used in a stm32cubeide project with the following steps:
+
+1. Clone this repository in your STM32CubeIDE project folder
+2. Go to `Project -> Properties -> C/C++ Build -> Settings -> Build Steps Tab` and in `Pre-build steps` tab, add:
+   ```shell=
+   ${workspace_loc:/${ProjName}}/nturt_can_config/generate_c_code.sh ${workspace_loc:/${ProjName}}/nturt_can_config/nturt_can_config.dbc
+   ```
+3. Go to `Project -> Properties -> C/C++ General -> Paths and Symbols` and in `Includes` tab, add:
+   ```shell=
+   nturt_can_config/generated_code/nturt_can_config/include
+   ```
+4. Then in `Source Location` tab, add:
+   ```shell=
+   nturt_can_config/generated_code/nturt_can_config/src
+   ```
+5. Build and run your project
