@@ -12,15 +12,17 @@ print_usage() {
     echo ""
     echo "Usage: ./generate_c_code.sh [OPTIONS] <can_database_file>"
     echo "Options:"
+    echo "    -f --float      Configure the generated code to use float for physical value instead of double, only relavent when conbined with '-p' flag"
     echo "    -h --help       Print this help message and exit"
-    echo "    -p --physical   Configure the generated code to use physical values(double) instead of raw data"
+    echo "    -p --physical   Configure the generated code to use physical values instead of raw data"
 }
 
 # default argument/option
 DBC_FILE_WITH_PATH=""
+USE_FLOAT=false
 USE_PHYSICAL_VALUE=false
 
-PARAM=$(getopt -o hp -l help,physical -n "$0" -- "$@")
+PARAM=$(getopt -o fhp -l float,help,physical -n "$0" -- "$@")
 
 if [ $? != 0 ]; then
     print_usage
@@ -33,6 +35,11 @@ eval set -- "${PARAM}"
 
 while true; do
     case "$1" in
+        -f|--float)
+            USE_FLOAT=true
+            shift
+            ;;
+
         -h|--help)
             print_usage
             exit
@@ -106,8 +113,13 @@ ${ABSOLUTE_PATH}/fixfile.sh ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}
 if [ "${USE_PHYSICAL_VALUE}" = true ]; then
     sed -i "/${DBC_FILE_UPPER_CASE}_USE_SIGFLOAT/c\#define ${DBC_FILE_UPPER_CASE}_USE_SIGFLOAT" \
         ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/${DBC_FILE_BASENAME}-config.h
-    sed -i "/typedef double sigfloat_t;/c\typedef double sigfloat_t;" \
-        ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
+    if [ "${USE_FLOAT}" = true ]; then
+        sed -i "/typedef double sigfloat_t;/c\typedef float sigfloat_t;" \
+            ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
+    else
+        sed -i "/typedef double sigfloat_t;/c\typedef double sigfloat_t;" \
+            ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
+    fi
 fi
 
 echo "Generate code completed"
