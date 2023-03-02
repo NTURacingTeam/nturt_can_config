@@ -122,4 +122,10 @@ if [ "${USE_PHYSICAL_VALUE}" = true ]; then
     fi
 fi
 
+# configure to store frame timestamp when receive can siganl and monitor frame timeout
+sed -i "/${DBC_FILE_UPPER_CASE}_USE_DIAG_MONITORS/c\#define ${DBC_FILE_UPPER_CASE}_USE_DIAG_MONITORS" \
+    ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/${DBC_FILE_BASENAME}-config.h
+sed -i "/#define GetSystemTick() __get__tick__()/c\#define GetSystemTick() __get__tick__()" \
+    ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
+
 echo "Generate code completed"
