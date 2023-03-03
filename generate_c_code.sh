@@ -131,11 +131,11 @@ sed -i "/#define GetSystemTick() __get__tick__()/c\#define GetSystemTick() __get
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
 
 # define alert reception timeout function
-sed -i "/#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timepot__(msgid,lastcyc)/i \
-    \extern void __alert_reception_timepot__(uint32_t msgid, uint32_t lastcyc);" \
+sed -i "/#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timeout__(msgid,lastcyc)/i \
+    \extern void __alert_reception_timeout__(uint32_t msgid, uint32_t lastcyc);" \
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
-sed -i "/#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timepot__(msgid,lastcyc)/c \
-    \#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timepot__(msgid,lastcyc)" \
+sed -i "/#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timeout__(msgid,lastcyc)/c \
+    \#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timeout__(msgid,lastcyc)" \
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
 
 # define send can message function
