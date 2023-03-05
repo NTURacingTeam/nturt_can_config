@@ -125,14 +125,14 @@ fi
 # configure to store frame timestamp when receive can siganl and monitor frame timeout
 sed -i "/${DBC_FILE_UPPER_CASE}_USE_DIAG_MONITORS/c\#define ${DBC_FILE_UPPER_CASE}_USE_DIAG_MONITORS" \
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/${DBC_FILE_BASENAME}-config.h
-sed -i "/#define GetSystemTick() __get__tick__()/i\extern uint32_t __get__tick__();" \
+sed -i "/#define GetSystemTick() __get__tick__()/i\__attribute__((weak)) uint32_t __get__tick__() {return 0u;}" \
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
 sed -i "/#define GetSystemTick() __get__tick__()/c\#define GetSystemTick() __get__tick__()" \
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
 
 # define alert reception timeout function
 sed -i "/#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timeout__(msgid,lastcyc)/i \
-    \extern void __alert_reception_timeout__(uint32_t msgid, uint32_t lastcyc);" \
+    \__attribute__((weak)) void __alert_reception_timeout__(uint32_t msgid, uint32_t lastcyc) {(void)msgid; (void)lastcyc;}" \
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
 sed -i "/#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timeout__(msgid,lastcyc)/c \
     \#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timeout__(msgid,lastcyc)" \
@@ -140,7 +140,7 @@ sed -i "/#define AlertReceptionTimeout(msgid,lastcyc) __alert_reception_timeout_
 
 # define send can message function
 sed -i "/#define SendCanMessage(msgid,ide,d,len) __send_can_message__(msgid,ide,d,len)/i \
-    extern int __send_can_message__(uint32_t msgid, uint8_t ide, uint8_t *d, uint8_t len);" \
+    __attribute__((weak)) int __send_can_message__(uint32_t msgid, uint8_t ide, uint8_t *d, uint8_t len) {(void)msgid; (void)ide; (void)d; (void)len; return 1u;}" \
     ${ABSOLUTE_PATH}/generated_code/${DBC_FILE_BASENAME}/include/dbccodeconf.h
 sed -i "/#define SendCanMessage(msgid,ide,d,len) __send_can_message__(msgid,ide,d,len)/c \
     #define SendCanMessage(msgid,ide,d,len) __send_can_message__(msgid,ide,d,len)" \
