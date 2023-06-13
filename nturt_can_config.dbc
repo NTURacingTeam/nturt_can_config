@@ -33,7 +33,7 @@ NS_ :
 
 BS_:
 
-BU_: BMS FRONT_SENSOR IMU INV LOGGER REAR_SENSOR VCU
+BU_: BMS FRONT_SENSOR IMU INV LOGGER REAR_SENSOR VCU VCU_HP
 
 
 BO_ 160 INV_Temperature_Set_1: 8 INV
@@ -156,10 +156,10 @@ BO_ 175 INV_Diag_Data: 8 INV
 	SG_ INV_Diag_Data_3 : 48|16@1- (1,0) [-32768|32767] "" Vector__XXX
 
 BO_ 176 INV_Fast_Info: 8 INV
-	SG_ INV_Fast_Torque_Command : 0|16@1- (0.1,0) [-3276.8|32767.7] "torque:N.m" LOGGER, VCU
-	SG_ INV_Fast_Torque_Feedback : 16|16@1- (0.1,0) [-3276.8|3276.7] "torque:N.m" LOGGER, VCU
-	SG_ INV_Fast_Motor_Speed : 32|16@1- (1,0) [-32768|32767] "angular_speed:rpm" LOGGER, VCU
-	SG_ INV_Fast_DC_Bus_Voltage : 48|16@1- (0.1,0) [-3276.8|3276.7] "voltage:V" LOGGER, VCU
+	SG_ INV_Fast_Torque_Command : 0|16@1- (0.1,0) [-3276.8|32767.7] "torque:N.m" LOGGER, VCU_HP
+	SG_ INV_Fast_Torque_Feedback : 16|16@1- (0.1,0) [-3276.8|3276.7] "torque:N.m" LOGGER, VCU_HP
+	SG_ INV_Fast_Motor_Speed : 32|16@1- (1,0) [-32768|32767] "angular_speed:rpm" LOGGER, VCU_HP
+	SG_ INV_Fast_DC_Bus_Voltage : 48|16@1- (0.1,0) [-3276.8|3276.7] "voltage:V" LOGGER, VCU_HP
 
 BO_ 192 INV_Command_Message: 8 VCU
 	SG_ VCU_Torque_Command : 0|16@1- (0.1,0) [-3276.8|3276.7] "torque:N.m" INV, LOGGER
@@ -387,7 +387,7 @@ BA_ "GenMsgCycleTime" BO_ 192 10;
 BA_ "GenMsgCycleTime" BO_ 193 0;
 BA_ "GenMsgCycleTime" BO_ 194 0;
 BA_ "GenMsgCycleTime" BO_ 392 100;
-BA_ "GenMsgCycleTime" BO_ 514 0;
+BA_ "GenMsgCycleTime" BO_ 514 100;
 BA_ "GenMsgCycleTime" BO_ 648 100;
 BA_ "GenMsgCycleTime" BO_ 904 100;
 BA_ "GenMsgCycleTime" BO_ 1160 100;

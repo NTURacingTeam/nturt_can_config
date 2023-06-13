@@ -80,7 +80,7 @@ ABSOLUTE_PATH=$(dirname $(realpath ${BASH_SOURCE:-$0}))
 if ! [[ -x ${ABSOLUTE_PATH}/c-coderdbc/build/coderdbc ]]; then
     echo "Software for generating c code not built, building..."
     cmake -S ${ABSOLUTE_PATH}/c-coderdbc/src -B ${ABSOLUTE_PATH}/c-coderdbc/build 1>/dev/null
-    cmake --build ${ABSOLUTE_PATH}/c-coderdbc/build --config release 1>/dev/null
+    cmake --build ${ABSOLUTE_PATH}/c-coderdbc/build -j$(nproc) --config release 1>/dev/null
     echo "Software for generating c code finished building"
 fi
 
