@@ -38,6 +38,18 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 if(FOR_ROS2)
+        # install headers
+        install(DIRECTORY generated_code/${DBC_FILE_BASENAME}/include/
+                DESTINATION include
+        )
+
+        # install libraries
+        install(TARGETS ${PROJECT_NAME}
+                RUNTIME DESTINATION bin
+                ARCHIVE DESTINATION lib
+                LIBRARY DESTINATION lib
+        )
+
         if(BUILD_TESTING)
                 find_package(ament_lint_auto REQUIRED)
                 # the following line skips the linter which checks for copyrights
@@ -52,7 +64,7 @@ if(FOR_ROS2)
 
         # export package dependencies
         ament_export_include_directories(
-                generated_code/${DBC_FILE_BASENAME}/include
+                include
         )
         ament_export_libraries(
                 ${PROJECT_NAME}
