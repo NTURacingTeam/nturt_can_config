@@ -209,35 +209,41 @@ BO_ 1160 IMU_Quternion: 8 IMU
 BO_ 1672 IMU_Pressure: 4 IMU
 	SG_ IMU_Pressure : 0|32@1+ (1,0) [0|0] "pressure:Pa" LOGGER
 
+BO_ 567248 VCU_Status: 5 VCU
+	SG_ VCU_Status : 0|8@1+ (1,0) [0|0] "" LOGGER
+	SG_ VCU_Error_Code : 8|32@1+ (1,0) [0|0] "" LOGGER
+
+BO_ 567249 REAR_SENSOR_Status: 5 REAR_SENSOR
+	SG_ REAR_SENSOR_Status : 0|8@1+ (1,0) [0|0] "" LOGGER
+	SG_ REAR_SENSOR_Error_Code : 8|32@1+ (1,0) [0|0] "" VCU LOGGER
+
 BO_ 2282410129 FRONT_SENSOR_1: 8 FRONT_SENSOR
-	SG_ FRONT_SENSOR_Front_Left_Wheel_Speeed : 0|16@1- (0.00392,0) [0|0] "angular_velocity:rad/s" LOGGER
-	SG_ FRONT_SENSOR_Front_Right_Wheel_Speeed : 16|16@1- (0.00392,0) [0|0] "angular_velocity:rad/s" LOGGER
-	SG_ FRONT_SENSOR_Front_Left_Wheel_Temperature_1 : 32|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
-	SG_ FRONT_SENSOR_Front_Left_Wheel_Temperature_2 : 40|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
-	SG_ FRONT_SENSOR_Front_Right_Wheel_Temperature_1 : 48|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
-	SG_ FRONT_SENSOR_Front_Right_Wheel_Temperature_2 : 56|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
+	SG_ FRONT_SENSOR_Front_Left_Wheel_Speed : 0|16@1- (0.1,0) [0|0] "angular_velocity:rpm" LOGGER
+	SG_ FRONT_SENSOR_Front_Right_Wheel_Speed : 16|16@1- (0.1,0) [0|0] "angular_velocity:rpm" LOGGER
+	SG_ FRONT_SENSOR_Front_Left_Tire_Temperature : 32|16@1- (0.01,0) [0|0] "temperature:C" LOGGER
+	SG_ FRONT_SENSOR_Front_Right_Tire_Temperature : 48|16@1- (0.01,0) [0|0] "temperature:C" LOGGER
 
 BO_ 2282410130 FRONT_SENSOR_2: 8 FRONT_SENSOR
-	SG_ FRONT_SENSOR_Brake : 0|8@1+ (1,0) [1|254] "" LOGGER
-	SG_ FRONT_SENSOR_Accelerator_1 : 16|8@1+ (1,0) [1|254] "" LOGGER
-	SG_ FRONT_SENSOR_Accelerator_2 : 24|8@1+ (1,0) [1|254] "" LOGGER
-	SG_ FRONT_SENSOR_Steer_Angle : 32|8@1- (0.0245,-3.14) [0|0] "angle:rad" LOGGER
-	SG_ FRONT_SENSOR_Front_Left_Suspension : 40|8@1+ (0.0000176,0.2) [0|0] "length:m" LOGGER
-	SG_ FRONT_SENSOR_Front_Right_Suspension : 48|8@1+ (0.0000176,0.2) [0|0]"length:m" LOGGER
-	SG_ FRONT_SENSOR_Accelerator_Micro 56|1@1+ (1,0) [0|1] "" LOGGER
-	SG_ FRONT_SENSOR_Brake_Micro 57|1@1+ (1,0) [0|1] "" LOGGER
+	SG_ FRONT_SENSOR_Brake : 0|8@1+ (0.004,0) [0|1] "" LOGGER
+	SG_ FRONT_SENSOR_Accelerator_1 : 8|8@1+ (0.004,0) [0|1] "" LOGGER
+	SG_ FRONT_SENSOR_Accelerator_2 : 16|8@1+ (0.004,0) [0|1] "" LOGGER
+	SG_ FRONT_SENSOR_Front_Brake_Pressure : 24|8@1+ (0.2,0) [0|1] "pressure:bar" LOGGER
+	SG_ FRONT_SENSOR_Front_Left_Suspension : 32|8@1+ (0.0000176,0.2) [0|0] "length:m" LOGGER
+	SG_ FRONT_SENSOR_Front_Right_Suspension : 40|8@1+ (0.0000176,0.2) [0|0]"length:m" LOGGER
+	SG_ FRONT_SENSOR_Steer_Angle : 48|12@1- (1,0) [0|0] "angle:deg" LOGGER
+	SG_ FRONT_SENSOR_Accelerator_Micro :  61|1@1+ (1,0) [0|1] "" LOGGER
+	SG_ FRONT_SENSOR_Brake_Micro : 62|1@1+ (1,0) [0|1] "" REAR_SENSOR LOGGER
 
 BO_ 2282410131 REAR_SENSOR_1: 8 REAR_SENSOR
-	SG_ REAR_SENSOR_Rear_Left_Wheel_Speed : 0|16@1- (0.00392,0) [0|0] "angular_velocity:rad/s" LOGGER
-	SG_ REAR_SENSOR_Rear_Right_Wheel_Speed : 16|16@1- (0.00392,0) [0|0] "angular_velocity:rad/s" LOGGER
-	SG_ REAR_SENSOR_Rear_Left_Wheel_Temperature_1 : 32|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
-	SG_ REAR_SENSOR_Rear_Left_Wheel_Temperature_2 : 40|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
-	SG_ REAR_SENSOR_Rear_Right_Wheel_Temperature_1 : 48|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
-	SG_ REAR_SENSOR_Rear_Right_Wheel_Temperature_2 : 56|8@1- (0.5,0) [0|0] "temperature:C" LOGGER
+	SG_ REAR_SENSOR_Rear_Left_Wheel_Speed : 0|16@1- (0.1,0) [0|0] "angular_velocity:rpm" LOGGER
+	SG_ REAR_SENSOR_Rear_Right_Wheel_Speed : 16|16@1- (0.1,0) [0|0] "angular_velocity:rpm" LOGGER
+	SG_ REAR_SENSOR_Rear_Left_Tire_Temperature : 32|16@1- (0.01,0) [0|0] "temperature:C" LOGGER
+	SG_ REAR_SENSOR_Rear_Right_Tire_Temperature : 48|16@1- (0.01,0) [0|0] "temperature:C" LOGGER
 
-BO_ 2282410132 REAR_SENSOR_2: 2 REAR_SENSOR
+BO_ 2282410132 REAR_SENSOR_2: 3 REAR_SENSOR
 	SG_ REAR_SENSOR_Rear_Left_Suspension : 0|8@1+ (0.0000176,0.2) [0|0] "length:m" LOGGER
 	SG_ REAR_SENSOR_Rear_Right_Suspension : 8|8@1+ (0.0000176,0.2) [0|0]"length:m" LOGGER
+	SG_ REAR_SENSOR_Rear_Brake_Pressure : 16|8@1+ (0.2,0) [0|1] "pressure:bar" LOGGER
 
 CM_ SG_ 160 INV_Module_A_Temp "IGBT Module A Temperature";
 CM_ SG_ 160 INV_Module_B_Temp "IGBT Module B Temperature";
@@ -394,7 +400,7 @@ BA_ "GenMsgCycleTime" BO_ 1160 100;
 BA_ "GenMsgCycleTime" BO_ 1672 20;
 BA_ "GenMsgCycleTime" BO_ 2282410129 100;
 BA_ "GenMsgCycleTime" BO_ 2282410130 100;
-BA_ "GenMsgCycleTime" BO_ 2282410121 100;
+BA_ "GenMsgCycleTime" BO_ 2282410131 100;
 BA_ "GenMsgCycleTime" BO_ 2282410132 100;
 
 VAL_ 170 INV_VSM_State 0 "VSM Start State" 1 "Pre-Charge Init state" 2 "pre-charge active state" 3 "pre-charge complete state" 4 "VSM wait state" 5 "VSM ready state" 6 "Motor Running State" 7 "blink fault code state" 14 "Shutdown state for Key Switch Mode 1" 15 "Reset the inverter" ;
