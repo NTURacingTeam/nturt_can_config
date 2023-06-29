@@ -38,7 +38,21 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 if(FOR_ROS2)
+        # make the library position independent for shared library to link to
+        set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+        # add extra utilitise for registering callbacks to ros2 nodes
+        target_include_directories(${PROJECT_NAME} PUBLIC
+                include
+        )
+        target_sources(${PROJECT_NAME} PRIVATE
+                src/can_callback_register.cpp
+        )
+
         # install headers
+        install(DIRECTORY include/${PROJECT_NAME}
+                DESTINATION include
+        )
         install(DIRECTORY generated_code/${DBC_FILE_BASENAME}/include/
                 DESTINATION include
         )
