@@ -126,10 +126,10 @@ BO_ 170 INV_Internal_States: 8 INV
 	SG_ INV_Limit_Coolant_Derating : 62|1@1+ (1,0) [0|1] "" LOGGER
 
 BO_ 171 INV_Fault_Codes: 8 INV
-	SG_ INV_Post_Fault_Lo : 0|16@1+ (1,0) [0|65535] "" LOGGER
-	SG_ INV_Post_Fault_Hi : 16|16@1+ (1,0) [0|65535] "" LOGGER
-	SG_ INV_Run_Fault_Lo : 32|16@1+ (1,0) [0|65535] "" LOGGER
-	SG_ INV_Run_Fault_Hi : 48|16@1+ (1,0) [0|65535] "" LOGGER
+	SG_ INV_Post_Fault_Lo : 0|16@1+ (1,0) [0|65535] "" LOGGER VCU
+	SG_ INV_Post_Fault_Hi : 16|16@1+ (1,0) [0|65535] "" LOGGER VCU
+	SG_ INV_Run_Fault_Lo : 32|16@1+ (1,0) [0|65535] "" LOGGER VCU
+	SG_ INV_Run_Fault_Hi : 48|16@1+ (1,0) [0|65535] "" LOGGER VCU
 
 BO_ 172 INV_Torque_And_Timer_Info: 8 INV
 	SG_ INV_Commanded_Torque : 0|16@1- (0.1,0) [-3276.8|3276.7] "torque:N.m" Vector__XXX
@@ -187,8 +187,8 @@ BO_ 392 IMU_Acceleration: 6 IMU
 	SG_ IMU_Acceleration_Z : 32|16@1- (0.001,0) [-8|8] "acceleration:G" LOGGER
 
 BO_ 514 BMS_Current_Limit: 8 BMS
-	SG_ BMS_Max_Discharge_Current : 0|16@1+ (1,0) [0|1000] "current:A" INV, LOGGER, VCU
-	SG_ BMS_Max_Charge_Current : 16|16@1+ (1,0) [0|1000] "current:A" INV, LOGGER, VCU
+	SG_ BMS_Max_Discharge_Current : 0|16@1+ (1,0) [0|1000] "current:A" INV, LOGGER, VCU_HP
+	SG_ BMS_Max_Charge_Current : 16|16@1+ (1,0) [0|1000] "current:A" INV, LOGGER, VCU_HP
 
 BO_ 648 IMU_Angular_Velocity: 6 IMU
 	SG_ IMU_Angular_Velocity_X : 0|16@1- (0.1,0) [-2000|2000] "angular_velocity:deg/s" LOGGER
@@ -209,11 +209,13 @@ BO_ 1160 IMU_Quaternion: 8 IMU
 BO_ 1672 IMU_Pressure: 4 IMU
 	SG_ IMU_Pressure : 0|32@1+ (1,0) [0|0] "pressure:Pa" LOGGER
 
-BO_ 567248 VCU_Status: 5 VCU
+BO_ 2148050896 VCU_Status: 7 VCU
 	SG_ VCU_Status : 0|8@1+ (1,0) [0|0] "" LOGGER
-	SG_ VCU_Error_Code : 8|32@1+ (1,0) [0|0] "" LOGGER
+	SG_ VCU_RTD_Condition : 8|16@1+ (1,0) [0|0] "" LOGGER
+	SG_ VCU_Error_Code : 24|32@1+ (1,0) [0|0] "" LOGGER
 
-BO_ 567249 REAR_SENSOR_Status: 5 REAR_SENSOR
+
+BO_ 2148050897 REAR_SENSOR_Status: 5 REAR_SENSOR
 	SG_ REAR_SENSOR_Status : 0|8@1+ (1,0) [0|0] "" LOGGER
 	SG_ REAR_SENSOR_Error_Code : 8|32@1+ (1,0) [0|0] "" VCU LOGGER
 
@@ -222,8 +224,8 @@ BO_ 2282410129 FRONT_SENSOR_1: 6 FRONT_SENSOR
 	SG_ FRONT_SENSOR_Accelerator_1 : 8|8@1+ (0.004,0) [0|1] "" LOGGER
 	SG_ FRONT_SENSOR_Accelerator_2 : 16|8@1+ (0.004,0) [0|1] "" LOGGER
 	SG_ FRONT_SENSOR_Steer_Angle : 24|16@1- (1,0) [0|0] "angle:deg" LOGGER
-	SG_ FRONT_SENSOR_Brake_Micro : 41|1@1+ (1,0) [0|1] "" REAR_SENSOR LOGGER
-	SG_ FRONT_SENSOR_Accelerator_Micro : 42|1@1+ (1,0) [0|1] "" LOGGER
+	SG_ FRONT_SENSOR_Brake_Micro : 40|1@1+ (1,0) [0|1] "" REAR_SENSOR LOGGER
+	SG_ FRONT_SENSOR_Accelerator_Micro : 41|1@1+ (1,0) [0|1] "" LOGGER
 
 BO_ 2282410130 FRONT_SENSOR_2: 8 FRONT_SENSOR
 	SG_ FRONT_SENSOR_Front_Left_Wheel_Speed : 0|16@1- (0.1,0) [0|0] "angular_velocity:rpm" LOGGER
@@ -412,8 +414,8 @@ BA_ "GenMsgCycleTime" BO_ 648 100;
 BA_ "GenMsgCycleTime" BO_ 904 100;
 BA_ "GenMsgCycleTime" BO_ 1160 100;
 BA_ "GenMsgCycleTime" BO_ 1672 20;
-BA_ "GenMsgCycleTime" BO_ 567248 100;
-BA_ "GenMsgCycleTime" BO_ 567249 100;
+BA_ "GenMsgCycleTime" BO_ 2148050896 100;
+BA_ "GenMsgCycleTime" BO_ 2148050897 100;
 BA_ "GenMsgCycleTime" BO_ 2282410129 100;
 BA_ "GenMsgCycleTime" BO_ 2282410130 100;
 BA_ "GenMsgCycleTime" BO_ 2282410131 100;
