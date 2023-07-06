@@ -186,10 +186,6 @@ BO_ 392 IMU_Acceleration: 6 IMU
 	SG_ IMU_Acceleration_Y : 16|16@1- (0.001,0) [-8|8] "acceleration:G" LOGGER
 	SG_ IMU_Acceleration_Z : 32|16@1- (0.001,0) [-8|8] "acceleration:G" LOGGER
 
-BO_ 514 BMS_Current_Limit: 8 BMS
-	SG_ BMS_Max_Discharge_Current : 0|16@1+ (1,0) [0|1000] "current:A" INV, LOGGER, VCU_HP
-	SG_ BMS_Max_Charge_Current : 16|16@1+ (1,0) [0|1000] "current:A" INV, LOGGER, VCU_HP
-
 BO_ 648 IMU_Angular_Velocity: 6 IMU
 	SG_ IMU_Angular_Velocity_X : 0|16@1- (0.1,0) [-2000|2000] "angular_velocity:deg/s" LOGGER
 	SG_ IMU_Angular_Velocity_Y : 16|16@1- (0.1,0) [-2000|2000] "angular_velocity:deg/s" LOGGER
@@ -206,6 +202,16 @@ BO_ 1160 IMU_Quaternion: 8 IMU
 	SG_ IMU_Quaternion_Y : 32|16@1- (0.0001,0) [-1|1] "" LOGGER
 	SG_ IMU_Quaternion_Z : 48|16@1- (0.0001,0) [-1|1] "" LOGGER
 
+BO_ 1536 BMS_Cell_Stats: 7 BMS
+	SG_ BMS_Segment_Index : 0|4@1+ (1,0) [0|15] "" LOGGER
+	SG_ BMS_Cell_Index : 4|4@1+ (1,0) [0|3] "" LOGGER
+	SG_ BMS_Cell_Voltage_1 : 8|8@1+ (0.01,2) [2|4.55] "voltage:V" LOGGER
+	SG_ BMS_Cell_Temperature_1 : 16|8@1+ (1,0) [0|255] "temperature:C" LOGGER
+	SG_ BMS_Cell_Voltage_2 : 24|8@1+ (0.01,2) [2|4.55] "voltage:V" LOGGER
+	SG_ BMS_Cell_Temperature_2 : 32|8@1+ (1,0) [0|255] "temperature:C" LOGGER
+	SG_ BMS_Cell_Voltage_3 : 40|8@1+ (0.01,2) [2|4.55] "voltage:V" LOGGER
+	SG_ BMS_Cell_Temperature_3 : 48|8@1+ (1,0) [0|255] "temperature:C" LOGGER
+
 BO_ 1672 IMU_Pressure: 4 IMU
 	SG_ IMU_Pressure : 0|32@1+ (1,0) [0|0] "pressure:Pa" LOGGER
 
@@ -213,7 +219,6 @@ BO_ 2148050896 VCU_Status: 7 VCU
 	SG_ VCU_Status : 0|8@1+ (1,0) [0|0] "" LOGGER
 	SG_ VCU_RTD_Condition : 8|16@1+ (1,0) [0|0] "" LOGGER
 	SG_ VCU_Error_Code : 24|32@1+ (1,0) [0|0] "" LOGGER
-
 
 BO_ 2148050897 REAR_SENSOR_Status: 5 REAR_SENSOR
 	SG_ REAR_SENSOR_Status : 0|8@1+ (1,0) [0|0] "" LOGGER
@@ -379,8 +384,6 @@ CM_ SG_ 194 INV_Parameter_Response_Addr "Address of parameter response message d
 CM_ SG_ 194 INV_Parameter_Response_Write_OK "0=Write failure, 1=Success";
 CM_ SG_ 194 INV_Parameter_Response_Data "Data from parameter message.  All data is 16 bits and is contained in bytes 4 and 5. Bytes 6 and 7 should be ignored.";
 
-CM_ SG_ 514 BMS_Max_Discharge_Current "Maximum discharge current from BMS";
-CM_ SG_ 514 BMS_Max_Charge_Current "Maximum charge current from BMS";
 
 
 BA_DEF_ BO_  "GenMsgCycleTime" INT 0 100000;
@@ -413,6 +416,7 @@ BA_ "GenMsgCycleTime" BO_ 514 100;
 BA_ "GenMsgCycleTime" BO_ 648 100;
 BA_ "GenMsgCycleTime" BO_ 904 100;
 BA_ "GenMsgCycleTime" BO_ 1160 100;
+BA_ "GenMsgCycleTime" BO_ 1536 500;
 BA_ "GenMsgCycleTime" BO_ 1672 20;
 BA_ "GenMsgCycleTime" BO_ 2148050896 100;
 BA_ "GenMsgCycleTime" BO_ 2148050897 100;
