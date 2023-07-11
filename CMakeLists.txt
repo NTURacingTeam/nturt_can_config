@@ -47,6 +47,7 @@ if(FOR_ROS2)
         )
         target_sources(${PROJECT_NAME} PRIVATE
                 src/can_callback_register.cpp
+                src/can_timeout_monitor.cpp
         )
 
         # install headers

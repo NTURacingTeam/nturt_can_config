@@ -9,6 +9,7 @@
 
 // nturt include
 #include "nturt_can_config.h"
+#include "nturt_can_config/can_timeout_monitor.hpp"
 
 /* callback function prototype -----------------------------------------------*/
 extern "C" {
@@ -69,9 +70,9 @@ void CanCallbackRegieter::reset_impl() {
     return 1;
   };
 
-  get().fmon_mono_ = [](FrameMonitor_t*, uint32_t) {};
+  get().fmon_mono_ = can_timeout_monior::fmon_mono;
 
-  get().tout_mono_ = [](FrameMonitor_t*, uint32_t, uint32_t) {};
+  get().tout_mono_ = can_timeout_monior::tout_mono;
 }
 
 CanCallbackRegieter CanCallbackRegieter::instance;

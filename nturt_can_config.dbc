@@ -202,7 +202,7 @@ BO_ 1160 IMU_Quaternion: 8 IMU
 	SG_ IMU_Quaternion_Y : 32|16@1- (0.0001,0) [-1|1] "" LOGGER
 	SG_ IMU_Quaternion_Z : 48|16@1- (0.0001,0) [-1|1] "" LOGGER
 
-BO_ 1536 BMS_Cell_Stats: 7 BMS
+BO_ 1536 BMS_Cell_Stats: 8 BMS
 	SG_ BMS_Segment_Index : 0|4@1+ (1,0) [0|15] "" LOGGER
 	SG_ BMS_Cell_Index : 4|4@1+ (1,0) [0|3] "" LOGGER
 	SG_ BMS_Cell_Voltage_1 : 8|8@1+ (0.01,2) [2|4.55] "voltage:V" LOGGER
@@ -211,8 +211,14 @@ BO_ 1536 BMS_Cell_Stats: 7 BMS
 	SG_ BMS_Cell_Temperature_2 : 32|8@1+ (0.3125,-20) [0|0] "temperature:C" LOGGER
 	SG_ BMS_Cell_Voltage_3 : 40|8@1+ (0.01,2) [2|4.55] "voltage:V" LOGGER
 	SG_ BMS_Cell_Temperature_3 : 48|8@1+ (0.3125,-20) [0|0] "temperature:C" LOGGER
+	SG_ BMS_Cell_Voltage_Error_1 : 56|1@1+ (1,0) [0|0] "" LOGGER
+	SG_ BMS_Cell_Temperature_Error_1 : 57|1@1+ (1,0) [0|0] "" LOGGER
+	SG_ BMS_Cell_Voltage_Error_2 : 58|1@1+ (1,0) [0|0] "" LOGGER
+	SG_ BMS_Cell_Temperature_Error_2 : 59|1@1+ (1,0) [0|0] "" LOGGER
+	SG_ BMS_Cell_Voltage_Error_3 : 60|1@1+ (1,0) [0|0] "" LOGGER
+	SG_ BMS_Cell_Temperature_Error_3 : 61|1@1+ (1,0) [0|0] "" LOGGER
 
-BO_ 1537 BMS_Error_Code: 1 BMS
+BO_ 1537 BMS_Status: 1 BMS
 	SG_ BMS_Error_Code : 0|4@1+ (1,0) [0|0] "" VCU, LOGGER
 
 BO_ 1672 IMU_Pressure: 4 IMU
@@ -420,7 +426,7 @@ BA_ "GenMsgCycleTime" BO_ 648 100;
 BA_ "GenMsgCycleTime" BO_ 904 100;
 BA_ "GenMsgCycleTime" BO_ 1160 100;
 BA_ "GenMsgCycleTime" BO_ 1536 300;
-BA_ "GenMsgCycleTime" BO_ 1531 300;
+BA_ "GenMsgCycleTime" BO_ 1537 300;
 BA_ "GenMsgCycleTime" BO_ 1672 20;
 BA_ "GenMsgCycleTime" BO_ 2148050896 100;
 BA_ "GenMsgCycleTime" BO_ 2148050897 100;

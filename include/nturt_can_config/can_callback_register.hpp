@@ -30,6 +30,12 @@ typedef std::function<void(FrameMonitor_t*, uint32_t)> fmon_mono_t;
 /// @brief Typedef for tout_mono callback function.
 typedef std::function<void(FrameMonitor_t*, uint32_t, uint32_t)> tout_mono_t;
 
+/**
+ * @brief Class for registering the callback functions for coderdbc, uses
+ * can_timeout_monitor as the default monitor functions
+ * "_FMon_MONO_nturt_can_config" and "_TOut_MONO_nturt_can_config".
+ *
+ */
 class CanCallbackRegieter {
  public:
   CanCallbackRegieter(const CanCallbackRegieter&) = delete;
