@@ -212,6 +212,9 @@ BO_ 1536 BMS_Cell_Stats: 7 BMS
 	SG_ BMS_Cell_Voltage_3 : 40|8@1+ (0.01,2) [2|4.55] "voltage:V" LOGGER
 	SG_ BMS_Cell_Temperature_3 : 48|8@1+ (0.3125,-20) [0|0] "temperature:C" LOGGER
 
+BO_ 1537 BMS_Error_Code: 1 BMS
+	SG_ BMS_Error_Code : 0|4@1+ (1,0) [0|0] "" VCU, LOGGER
+
 BO_ 1672 IMU_Pressure: 4 IMU
 	SG_ IMU_Pressure : 0|32@1+ (1,0) [0|0] "pressure:Pa" LOGGER
 
@@ -416,7 +419,8 @@ BA_ "GenMsgCycleTime" BO_ 514 100;
 BA_ "GenMsgCycleTime" BO_ 648 100;
 BA_ "GenMsgCycleTime" BO_ 904 100;
 BA_ "GenMsgCycleTime" BO_ 1160 100;
-BA_ "GenMsgCycleTime" BO_ 1536 500;
+BA_ "GenMsgCycleTime" BO_ 1536 300;
+BA_ "GenMsgCycleTime" BO_ 1531 300;
 BA_ "GenMsgCycleTime" BO_ 1672 20;
 BA_ "GenMsgCycleTime" BO_ 2148050896 100;
 BA_ "GenMsgCycleTime" BO_ 2148050897 100;
