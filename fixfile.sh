@@ -41,20 +41,15 @@ while true; do
         --)
             shift
             if [[ -z $* ]]; then
-                echo -e "${COLOR_RED}Error:${HIGHLIGHT} no argument given.${COLOR_REST} Accept one argument as directory"
+                echo -e "${COLOR_RED}Error:${HIGHLIGHT} no argument given.${COLOR_REST} Accept one argument as directory" >&2
+                print_usage
+                exit 1
+            elif [[ $# != 1 ]]; then
+                echo -e "${COLOR_RED}Error:${HIGHLIGHT} multiple arguments given.${COLOR_REST} Only accept one argument as directory" >&2
                 print_usage
                 exit 1
             else
-                while [[ -n $* ]]; do
-                    if [[ -n ${DIRECTORY} ]]; then
-                        echo -e "${COLOR_RED}Error:${HIGHLIGHT} multiple arguments given.${COLOR_REST} Only accept one argument as directory"
-                        print_usage
-                        exit 1
-                    else
-                        DIRECTORY=$1
-                        shift
-                    fi
-                done
+                DIRECTORY=$1
             fi
             break
             ;;

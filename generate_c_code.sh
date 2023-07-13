@@ -56,17 +56,12 @@ while true; do
                 echo -e "${COLOR_RED}Error:${HIGHLIGHT} no argument given.${COLOR_REST} Accept one argument as can database file"
                 print_usage
                 exit 1
+            elif [[ $# != 1 ]]; then
+                echo -e "${COLOR_RED}Error:${HIGHLIGHT} multiple arguments given.${COLOR_REST} Only accept one argument as can database file"
+                print_usage
+                exit 1
             else
-                while [[ -n $* ]]; do
-                    if [[ -n ${DBC_FILE_WITH_PATH} ]]; then
-                        echo -e "${COLOR_RED}Error:${HIGHLIGHT} multiple arguments given.${COLOR_REST} Only accept one argument as can database file"
-                        print_usage
-                        exit 1
-                    else
-                        DBC_FILE_WITH_PATH=$1
-                        shift
-                    fi
-                done
+                DBC_FILE_WITH_PATH=$1
             fi
             break
             ;;
