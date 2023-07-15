@@ -46,6 +46,7 @@ if(FOR_ROS2)
                 include
         )
         target_sources(${PROJECT_NAME} PRIVATE
+                src/battery_utils.cpp
                 src/can_callback_register.cpp
                 src/can_timeout_monitor.cpp
         )
