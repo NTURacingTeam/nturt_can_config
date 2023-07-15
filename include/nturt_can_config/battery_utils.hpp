@@ -27,6 +27,8 @@
 
 #define NUM_VALID_TEMPERATURE 73
 
+#define CURRENT_TO_C 0.0606
+
 /* typedef -------------------------------------------------------------------*/
 // battery data
 template <typename T>

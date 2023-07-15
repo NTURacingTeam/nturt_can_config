@@ -12,8 +12,6 @@
 // nturt include
 #include "nturt_can_config.h"
 
-#define CURRENT_TO_C 1
-
 /* Private typedef -----------------------------------------------------------*/
 struct VoltageToSOC {
   double voltage;
@@ -155,11 +153,13 @@ void BatteryData::update(BMS_Cell_Stats_t* frame) {
       frame->BMS_Cell_Temperature_3_phys;
 }
 
+#include <iostream>
+
 double BatteryData::average_voltage() {
   return std::accumulate(&voltage[0][0],
                          &voltage[NUM_BATTERY_SEGMENT - 1]
                                  [NUM_BATTERY_CELL_PER_SEGMENT - 1],
-                         0) /
+                         0.0) /
          NUM_VALID_CELL;
 }
 
@@ -167,7 +167,7 @@ double BatteryData::average_temperature() {
   return std::accumulate(&voltage[0][0],
                          &voltage[NUM_BATTERY_SEGMENT - 1]
                                  [NUM_BATTERY_CELL_PER_SEGMENT - 1],
-                         0) /
+                         0.0) /
          NUM_VALID_TEMPERATURE;
 }
 
