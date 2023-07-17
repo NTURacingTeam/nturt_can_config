@@ -50,9 +50,9 @@ struct BatteryData {
 
   const static battery_data_t<bool> valid_temperature;
 
-  battery_data_t<double> voltage;
+  battery_data_t<double> voltage = {0};
 
-  battery_data_t<double> temperature;
+  battery_data_t<double> temperature = {0};
 };
 
 /**

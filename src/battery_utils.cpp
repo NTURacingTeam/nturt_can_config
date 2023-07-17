@@ -153,8 +153,6 @@ void BatteryData::update(BMS_Cell_Stats_t* frame) {
       frame->BMS_Cell_Temperature_3_phys;
 }
 
-#include <iostream>
-
 double BatteryData::average_voltage() {
   return std::accumulate(&voltage[0][0],
                          &voltage[NUM_BATTERY_SEGMENT - 1]
