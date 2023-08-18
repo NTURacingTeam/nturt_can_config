@@ -70,7 +70,7 @@ class CanCallbackRegieter {
    */
   static void register_callback(tout_mono_t tout_mono);
 
-  /// @brief  Reset all callback functions.
+  /// @brief Reset all callback functions.
   static void reset();
 
   static uint32_t get_tick();
